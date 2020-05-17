@@ -1,3 +1,37 @@
 Deno is a new runtime for executing JavaScript and TypeScript outside of the web browser.
 
 for more: https://deno.land/v1
+
+Installation
+
+Deno ships as a single executable with no dependencies. You can install it using the installers below, or download a release binary from the releases page.
+
+Using Shell (macOS, Linux):
+
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
+Using PowerShell (Windows):
+
+iwr https://deno.land/x/install/install.ps1 -useb | iex
+
+Using Cargo (Windows, macOS, Linux):
+
+cargo install deno
+
+Using Homebrew (macOS):
+
+brew install deno
+
+Using Chocolatey (Windows):
+
+choco install deno
+
+Using Scoop (Windows):
+
+scoop install deno
+
+Because Deno requires the use of file extensions for module imports and allows http imports, and most editors and language servers do not natively support this at the moment, many editors will throw errors about being unable to find files or imports having unnecessary file extensions.
+
+-As of now VSCode have extension by axetroy
+-JetBrains IDEs is not yet available
+
