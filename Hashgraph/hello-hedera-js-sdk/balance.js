@@ -1,12 +1,12 @@
 // Import the Hedera Hashgraph JS SDK
-// Example uses Hedera JavaScript SDK v1.1.8
-const { Client } = require("@hashgraph/sdk");
+// Example uses Hedera JavaScript SDK v1.1.12
+const {Ed25519PrivateKey, Client, AccountBalanceQuery } = require("@hashgraph/sdk");
 // Allow access to our .env file variables
 require("dotenv").config();
 
 // Grab your account ID and private key from the .env file
+const operatorPrivateKey = Ed25519PrivateKey.fromString(process.env.OPERATOR_KEY);
 const operatorAccountId = process.env.OPERATOR_ID;
-const operatorPrivateKey = process.env.OPERATOR_KEY;
 
 
 // If we weren't able to grab it, we should throw a new error
@@ -25,7 +25,7 @@ client.setOperator(operatorAccountId, operatorPrivateKey);
 // Hedera is an asynchronous environment :)
 (async function() {
 
-  // Attempt to get and display the balance of our account
-  var currentBalance = (await client.getAccountBalance(operatorAccountId)).toString();
-  console.log("account balance:", currentBalance);
+    // Attempt to get and display the balance of our account
+    var currentBalance = await new AccountBalanceQuery().setAccountId(operatorAccountId).execute(client);
+    console.log("account balance:", currentBalance);
 })();
