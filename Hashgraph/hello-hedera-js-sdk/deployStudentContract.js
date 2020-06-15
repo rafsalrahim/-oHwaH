@@ -10,7 +10,7 @@ function createHederaClient() {
     if (process.env.OPERATOR_KEY == null || process.env.OPERATOR_ID == null) {
         throw new Error("environment variables OPERATOR_KEY and OPERATOR_ID must be present");
     }
-
+``
     const operatorPrivateKey = Ed25519PrivateKey.fromString(process.env.OPERATOR_KEY);
     const operatorAccount = process.env.OPERATOR_ID;
 
