@@ -8,6 +8,9 @@ var express = require("express");
 var app = express();app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 function createHederaClient() {
     if (process.env.OPERATOR_KEY == null || process.env.OPERATOR_ID == null) {
@@ -38,13 +41,14 @@ function createHederaClient() {
 
     console.log("contract bytecode size:", smartContractByteCode.length, "bytes");
 // }
+    var newContractId;
 
 // main();
 
 async function deployContract(){
     // First we must upload a file containing the byte code
     const byteCodeFileId = (await (await new FileCreateTransaction()
-        .setMaxTransactionFee(new Hbar(3))
+        .setMaxTransactionFee(new Hbar(4))
         .addKey(operatorPrivateKey.publicKey)
         .setContents(smartContractByteCode)
         .execute(hederaClient))
@@ -67,30 +71,31 @@ async function deployContract(){
         .execute(hederaClient))
         .getRecord(hederaClient);
 
-    const newContractId = record.receipt.getContractId();
+        newContractId = record.receipt.getContractId();
 
     console.log("contract create gas used:", record.getContractCreateResult().gasUsed);
     console.log("contract create transaction fee:", record.transactionFee.asTinybar());
     console.log("contract:", newContractId.toString());
 }
 
-app.get("/deployContract", (req, res, next) => {
-    deployContract();
-    res.json(["Tony","Lisa","Michael","Ginger","Food"]);
+app.get("/deployContract",async (req, res, next) => {
+    await deployContract();
+    res.send("Completed");
     });
 
-    async function addRecord() {
+    async function addRecord(data) {
 
     //add record
+    console.log(data.id+data.name)
         const getRecord = await (await new ContractExecuteTransaction()
             .setContractId(newContractId)
             .setGas(29000) // ~6016
             .setFunction("addRecord", new ContractFunctionParams()
-                .addUint32(1)  
-                .addString("ab1")
-                .addString("10")
-                .addString("13/30/30")
-           )
+                .addUint32(data.id)  
+                .addString(data.name)
+                .addString(data.mark)
+                .addString(data.time)
+            )
             .execute(hederaClient))
             // [getReceipt] or [getRecord] waits for consensus before continuing
             //      and will throw an exception
@@ -102,9 +107,11 @@ app.get("/deployContract", (req, res, next) => {
         // hederaClient.close();
     }
 
-    app.get("/addRecord", (req, res, next) => {
-        addRecord();
-        res.json(["Tony","Lisa","Michael","Ginger","Food"]);
+    app.post("/addRecord", async (req, res, next) => {
+        const data=req.body;
+        console.log(data);
+        
+        res.send(await addRecord(data));
         });
 
     async function history(){
@@ -114,14 +121,14 @@ app.get("/deployContract", (req, res, next) => {
         return record2;
     }   
 
-    app.get("/recordhistory", (req, res, next) => {
-        const result=addRecord();
-        res.json(result[0]);
+    app.get("/recordhistory", async (req, res, next) => {
+        const result=await history();
+        res.send(result);
     });
 
-    app.get("/close", (req, res, next) => {
-        hederaClient.close();
-        res.json(["true","result true"]);
+    app.get("/close", async (req, res, next) => {
+        await hederaClient.close();
+        res.send("completed");
     });
 
     async function updateRecord(){
@@ -140,29 +147,34 @@ app.get("/deployContract", (req, res, next) => {
     console.log("execute gas used:", getRecord.getContractExecuteResult().gasUsed);
     } 
 
-    app.get("/updateRecord", (req, res, next) => {
-        updateRecord();
-        res.json(["true","result true"]);
+    app.get("/updateRecord", async (req, res, next) => {
+        await updateRecord();
+        res.send("Completed");
     });
 
-    async function  display(){
+    async function  display(data){
+
         let callResult = await new ContractCallQuery()
         .setContractId(newContractId)
         .setGas(11000) // ~897
         .setFunction("display", new ContractFunctionParams()
-        .addUint32(1))
+        .addUint32(data.id))
         .execute(hederaClient);
 
     console.log("message first:", callResult.getUint32(0));
     console.log("message first:", callResult.getString(1));
     console.log("message first:", callResult.getString(2));
-        return {
-            "id":callResult.getUint32(0),
-            "name":callResult.getString(1),
-            "mark":callResult.getString(2)
-        }
+
+    return JSON.stringify({
+        'id': callResult.getUint32(0),
+        'naname': callResult.getString(1),
+        'mark': callResult.getString(2),
+        'UpdatedTime':callResult.getString(3)                          
+    });
+
+        
     }
-    app.get("/display", (req, res, next) => {
-        const result=display();
-        res.json(result);
+    app.post("/display",async(req, res, next) => {
+        const result= await display(req.body);
+        res.send("Display result: "+result);
     });
