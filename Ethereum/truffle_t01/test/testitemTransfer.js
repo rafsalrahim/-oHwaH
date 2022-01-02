@@ -8,5 +8,6 @@ contract("ItemTransfer", accounts => {
 
        const result = await ItemTransferInstance.createItem(ItemName, ItemPrice,{from:accounts[0]});
        console.log(result);
+       assert.equal(result.logs[0].args._itemIndex,0,"Its not the first time");
     })
 });

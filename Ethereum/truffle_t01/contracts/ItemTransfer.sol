@@ -19,7 +19,7 @@ contract ItemTransfer is Ownable {
     mapping(uint256 => s_Item) public Items;
     uint256 itemIndex;
 
-    event SupplayCHainStep(uint256 _itemprice, uint256 _step, address _item);
+    event SupplayCHainStep(uint256 _itemIndex, uint256 _step, address _item);
 
     function createItem(string memory _itemname, uint256 _itemprice)
         public
@@ -31,7 +31,7 @@ contract ItemTransfer is Ownable {
         Items[itemIndex]._itemprice = _itemprice;
         Items[itemIndex]._state = supplayChainState.Created;
         emit SupplayCHainStep(
-            _itemprice,
+            itemIndex,
             uint256(Items[itemIndex]._state),
             address(item)
         );
