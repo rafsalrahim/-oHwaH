@@ -41,7 +41,7 @@ class App extends Component {
       console.error(error);
     }
   };
-
+//test code throwed error but check
 //   listenToPaymentEvent = () =>{
 //     this.itemTransfer.event.SupplyChainStep().on("data", async function(evt){
 // console.log(evt);
