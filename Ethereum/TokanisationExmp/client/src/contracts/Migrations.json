@@ -1728,12 +1728,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xE4B4FAA4D64e6d7089b1b57C549A0F1CbB259e80",
-      "transactionHash": "0xb9f0e86db6ea84f47903f9124ff0a603fd7b70f4b7b0a5d09c19f13d0f05e9b9"
+      "address": "0xDC2066E67F66c29D4ddAB4b01a402037077d6a7b",
+      "transactionHash": "0x4371bc3c223fd88e6d933458ffbd558b07300f51789af42a33fbcf24b9ca0887"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-04T06:35:31.765Z",
+  "updatedAt": "2022-01-04T11:08:45.474Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
