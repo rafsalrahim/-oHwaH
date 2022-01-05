@@ -25,12 +25,12 @@ class App extends Component {
         MyToken.networks[this.networkId] && MyToken.networks[this.networkId].address,
       );
 
-      this.tokenInstance = new this.web3.eth.Contract(
+      this.tokenSaleInstance = new this.web3.eth.Contract(
         MyTokenSale.abi,
         MyTokenSale.networks[this.networkId] && MyTokenSale.networks[this.networkId].address,
       );
 
-      this.tokenInstance = new this.web3.eth.Contract(
+      this.kycInstance = new this.web3.eth.Contract(
         KycContract.abi,
         KycContract.networks[this.networkId] && KycContract.networks[this.networkId].address,
       );
@@ -60,23 +60,30 @@ class App extends Component {
     this.setState({ storageValue: response });
   };
 
+  handleInputChange = (event)=>{
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({ [name]: value});
+  }
+
+   handleKycWhitlisting = async () =>{
+
+    await this.kycInstance.methods.setKycCompleted(this.state.kycAddress).send({from: this.account[0]});
+    alert("Kyc Instance for "+this.state.kycAddress+"is completed")
+  }
+
   render() {
-    if (this.state.loaded) {
+    if (!this.state.loaded) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+        <h1>Pokemon Tokens</h1>
+        <p>Get it today for exclusive deals</p>
+        <h2>Kyc Whitlisting</h2>
+        Address to allow: <input type="text" name="kycAddress" value={this.state.kycAddress} onChange={this.handleInputChange}/>
+      <button onClick={this.handleKycWhitlisting}> Whitelist</button>
       </div>
     );
   }
