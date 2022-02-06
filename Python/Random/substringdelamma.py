@@ -8,7 +8,7 @@ def test_1(string=""):
     testList = []
     initial = 0
 
-    while initial < len(string) and len(string):
+    while initial < len(string):
         for i in range(initial, len(string)):
             substring += string[i]
 
