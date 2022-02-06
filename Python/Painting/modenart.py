@@ -24,7 +24,8 @@ for i in range(1, 101):
         picachu.setheading(180)
         picachu.forward(500)
         picachu.setheading(0)
-
+ts = t.getscreen()
+ts.getcanvas().postscript(file="duck.eps")
 
 screen = t.Screen()  # class to make sure the window stays
 screen.exitonclick()  # function self explanatory
