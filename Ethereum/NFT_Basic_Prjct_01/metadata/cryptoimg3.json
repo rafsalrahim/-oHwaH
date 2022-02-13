@@ -1,0 +1,12 @@
+{
+    "name":"Fade to rise",
+    "description": "3/5 of first relese of RR photography",
+    "image": "https://ipfs.io/ipfs/QmUNrbZErBHcarFxgoDw4PRK6PWDu8P5482VmjCxn7aVC6",
+    "attributes":[{
+        "trait_type": "Generatyion",
+        "value" : 1
+    },{
+        "trait_type": "background",
+        "value" : "night"
+    }]
+}

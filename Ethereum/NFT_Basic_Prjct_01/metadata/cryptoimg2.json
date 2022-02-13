@@ -1,0 +1,12 @@
+{
+    "name":"The demon",
+    "description": "2/5 of first relese of RR photography",
+    "image": "https://ipfs.io/ipfs/QmVPTrYP4WmGUTMaDJkjFm72DcHJhamRZ7yWCUmXFTA62Y",
+    "attributes":[{
+        "trait_type": "Generatyion",
+        "value" : 1
+    },{
+        "trait_type": "background",
+        "value" : "night"
+    }]
+}

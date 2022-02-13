@@ -1,0 +1,12 @@
+{
+    "name":"Tiney hill",
+    "description": "4/5 of first relese of RR photography",
+    "image": "https://ipfs.io/ipfs/QmTnptY14RrQtuCcY8Zdmmroo4zXyXyzDuBmhQWxrLp7eM",
+    "attributes":[{
+        "trait_type": "Generatyion",
+        "value" : 1
+    },{
+        "trait_type": "background",
+        "value" : "day"
+    }]
+}

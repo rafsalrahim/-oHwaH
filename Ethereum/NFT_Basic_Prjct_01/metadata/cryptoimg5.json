@@ -1,0 +1,12 @@
+{
+    "name":"symmatry of world",
+    "description": "5/5 of first relese of RR photography",
+    "image": "https://ipfs.io/ipfs/QmYky9JcTsBifS5ukJ1ajQTw19GwUbbpFeubEbRDwMKBix",
+    "attributes":[{
+        "trait_type": "Generatyion",
+        "value" : 1
+    },{
+        "trait_type": "background",
+        "value" : "day"
+    }]
+}

@@ -20,7 +20,15 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.11",
   networks:{
+    mumbai:
+    {
+    url: process.env.Mum_URL,
+    accounts: [process.env.PKEY]
+  },
+    ropsten:
+    {
     url: process.env.R_URL,
-    accounts: process.env.R_ACCOUNT
+    accounts: [process.env.PKEY]
   }
+}
 };

@@ -1,0 +1,12 @@
+{
+    "name":"Fire of Life",
+    "description": "1/5 of first relese of RR photography",
+    "image": "https://ipfs.io/ipfs/QmTevfbzYL2yEYPq3cZT3znqASYsHJ81EBsTYspujZg4zY",
+    "attributes":[{
+        "trait_type": "Generatyion",
+        "value" : 1
+    },{
+        "trait_type": "background",
+        "value" : "night"
+    }]
+}
