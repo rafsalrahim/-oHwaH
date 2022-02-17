@@ -12,6 +12,7 @@ class Solution:
         self.head = None
 
     def print(self):
+        print("data in list printing")
         if self.head == None:
             print("Empty")
             return
@@ -50,11 +51,10 @@ class Solution:
 
             curr = temp
         itr = dummy_head.next
+        print('sorted data printing')
         while itr:
             print(itr.data)
             itr = itr.next
-
-        return dummy_head
 
 
 if __name__ == '__main__':
