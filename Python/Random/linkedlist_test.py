@@ -37,27 +37,13 @@ class linkedlist:
             self.count += 1
             itr = itr.next
 
-    def sort(self, data):
-        if self.head == None:
-            self.head = Node(data, None)
-            return
-        itr = self.head
-        while itr.next:
-            if itr.data > data:
-                tmp = self.Node(data, itr.data)
-                itr = tmp
-
 
 if __name__ == '__main__':
     ll = linkedlist()
-    ll.insert_begining(10)
-    ll.print()
+    ll.insert_at_end(10)
     ll.insert_at_end(13)
     ll.insert_at_end(2)
     ll.insert_at_end(6)
     ll.insert_at_end(1)
     ll.insert_at_end(9)
-    ll.print()
-    ll.sort()
-    print("sort")
     ll.print()
