@@ -45,7 +45,6 @@ class Solution:
                 next_pointer = next_pointer.next
 
             temp = curr.next
-
             curr.next = next_pointer
             prev_pointer.next = curr
 
