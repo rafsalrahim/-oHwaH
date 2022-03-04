@@ -7,7 +7,7 @@ import "@openzeppelin/contract/security/ReentrancyGuard.sol";
 contract NFTMarket is ReentrancyGuard {
     using Counters for Counters.Counter;
     Counters.Counter private _itemIds;
-    Counters.Counter private _itemIds;
+    Counters.Counter private _itemSold;
 
     address payable owner;
     uint256 listPrice = 0.025 ether;
@@ -61,6 +61,21 @@ contract NFTMarket is ReentrancyGuard {
     IERC721(nftContract).transferFrom(msg.sender,address(this),tokenId);
 
     emit MarketItemCreated(itemId,nftContract,tokenId,msg.sender,address(0),price,false);
+
+
+    }
+
+    function createMarketSale(address nftContract, uint256 itemId) public payable nonReentrant{
+        uint price = idToMarketitem[itemId].price;
+        uint tokenId = idToMarketitem[itemId].tokenId;
+        require(msg.value == price, "price submited is not correct");
+        idToMarketitem[itemId].seller.transfer[msg.value] ;
+        IERC721(nftContract).transfer(address(this),msg.sender,tokenId) ;
+        idToMarketitem[itemId].owner =payable(msg.sender);
+         idToMarketitem[itemId].sold = true ;
+        _itemSold.increment();
+        payable(owner).transfer(listingprice);
+
 
     }
 
