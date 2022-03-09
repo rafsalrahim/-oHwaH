@@ -76,7 +76,6 @@ contract NFTMarket is ReentrancyGuard {
         _itemSold.increment();
         payable(owner).transfer(listingprice);
 
-
     }
 
 }
